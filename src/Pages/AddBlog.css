@@ -1,0 +1,51 @@
+h1 {
+  margin-bottom: 100px;
+  text-align: center;
+  margin-top: 31px;
+  color: white;
+  font-size: 50px;
+  font-family: cursive;
+  font-weight: bold;
+}
+.Div {
+  text-align: center;
+}
+.Div input[type="text"] {
+  height: 60px;
+  outline: none;
+  border: none;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 8px;
+  background-color: white;
+}
+.Div textarea {
+  height: 185px;
+  margin-right: 15px;
+  width: 185px;
+  outline: none;
+  border: none;
+  padding: 0 15px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 8px;
+  background-color: white;
+}
+.inputs {
+  margin-right: 100px;
+}
+input[type="submit"] {
+  height: 60px;
+  outline: none;
+  border: none;
+  padding: 0 115px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  border-radius: 8px;
+  background-color: white;
+  margin-right: 75px;
+}
