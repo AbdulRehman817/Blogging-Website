@@ -9,6 +9,7 @@ h1 {
 }
 .Div {
   text-align: center;
+  margin-top: 50px;
 }
 .Div input[type="text"] {
   height: 60px;
@@ -48,4 +49,11 @@ input[type="submit"] {
   border-radius: 8px;
   background-color: white;
   margin-right: 75px;
+}
+.mainDiv {
+  margin-top: 40px;
+}
+.mainDiv h1 {
+  font-size: 30px;
+  font-weight: bold;
 }

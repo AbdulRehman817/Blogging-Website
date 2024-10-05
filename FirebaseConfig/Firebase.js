@@ -8,6 +8,8 @@ import {
   collection,
   doc,
   getDoc,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -59,4 +61,6 @@ export {
   getDocs,
   getDoc,
   uploadBytesResumable,
+  updateDoc,
+  deleteDoc,
 };
