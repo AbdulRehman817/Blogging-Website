@@ -14,6 +14,10 @@ const Login = () => {
   const [warning, setWarning] = useState("");
 
   const SignupBtn = (e) => {
+    const loginBtn = () => {
+      navigate("/");
+    };
+
     e.preventDefault();
     setWarning("");
     const userEmail = email.current.value;
@@ -55,7 +59,7 @@ const Login = () => {
         <br />
         <input type="password" placeholder="Enter password" ref={password} />
 
-        <a href="/">Don't have an account</a>
+        <a onClick={loginBtn}>Don't have an account</a>
 
         <input type="submit" onClick={SignupBtn} />
         {warning && (
