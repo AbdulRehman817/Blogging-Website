@@ -55,7 +55,7 @@ const Login = () => {
         <br />
         <input type="password" placeholder="Enter password" ref={password} />
 
-        <a href="./Signup">Don't have an account</a>
+        <a href="/">Don't have an account</a>
 
         <input type="submit" onClick={SignupBtn} />
         {warning && (
