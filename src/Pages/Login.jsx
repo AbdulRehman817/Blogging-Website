@@ -12,12 +12,11 @@ const Login = () => {
   const email = useRef();
   const password = useRef();
   const [warning, setWarning] = useState("");
+  const loginBtn = () => {
+    navigate("/Signup");
+  };
 
   const SignupBtn = (e) => {
-    const loginBtn = () => {
-      navigate("/");
-    };
-
     e.preventDefault();
     setWarning("");
     const userEmail = email.current.value;
