@@ -80,4 +80,5 @@ form div h1 {
 a {
   margin-left: 300px;
   font-size: 15px;
+  cursor: pointer;
 }

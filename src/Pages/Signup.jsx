@@ -125,6 +125,7 @@ const Signup = () => {
           ref={userLastName}
         />
         <a onClick={loginBtn}>Already have an account</a>
+        <input type="submit" value="Signup" />
         <br />
 
         {warning && (
