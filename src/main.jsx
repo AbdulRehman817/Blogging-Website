@@ -7,7 +7,7 @@ import UserBlog from "./Pages/UserBlog.jsx";
 import Signup from "./Pages/Signup.jsx";
 import Login from "./Pages/Login.jsx";
 import AddBlog from "./Pages/AddBlog.jsx";
-import SingleBlog from "./Pages/singleBlog.jsx";
+import SingleBlog from "./Pages/SingleBlog.jsx";
 import Profile from "./Pages/Profile.jsx";
 import Input from "./Pages/input.jsx";
 import "./index.css";
@@ -30,16 +30,15 @@ const router = createBrowserRouter([
         element: <UserBlog />,
       },
       {
-        path: "singleblog/:id",
-        element: <SingleBlog />,
-      },
-      {
         path: "profile",
         element: <Profile />,
       },
     ],
   },
-
+  {
+    path: "singleblog/:id",
+    element: <SingleBlog />,
+  },
   {
     path: "login",
     element: <Login />,
