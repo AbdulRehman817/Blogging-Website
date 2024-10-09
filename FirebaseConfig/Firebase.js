@@ -26,6 +26,7 @@ import {
   onAuthStateChanged,
   signOut,
   GoogleAuthProvider,
+  GithubAuthProvider, // hogaya jazakallah ok..
   signInWithPopup,
 } from "firebase/auth";
 
@@ -44,7 +45,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
-const provider = new GoogleAuthProvider();
+
 export {
   auth,
   createUserWithEmailAndPassword,
@@ -64,8 +65,8 @@ export {
   getDoc,
   uploadBytesResumable,
   updateDoc,
-  deleteDoc,
-  provider,
+  deleteDoc, //check karo
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
 };

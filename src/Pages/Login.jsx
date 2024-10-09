@@ -4,8 +4,9 @@ import {
   signInWithEmailAndPassword,
   auth,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithPopup,
-  provider,
+  // provider,
 } from "../../FirebaseConfig/Firebase";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
@@ -18,14 +19,16 @@ const Login = () => {
   const loginBtn = () => {
     navigate("/Signup");
   };
-  function loginWithGoogle() {
+  // * Google sigin * //
+  function loginAuth(authprovider) {
+    const provider = new authprovider();
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const credential = authprovider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
-        const user = result.user;
+        const user = result.user; // ye kio hata rahe ho
         console.log(user);
         navigate("/");
         // IdP data available using getAdditionalUserInfo(result)
@@ -38,10 +41,11 @@ const Login = () => {
         // The email of the user's account used.
         const email = error.customData.email;
         // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        const credential = authprovider.credentialFromError(error);
         // ...
       });
   }
+  // * Google sigin * //
 
   const SignupBtn = (e) => {
     e.preventDefault();
@@ -96,7 +100,7 @@ const Login = () => {
         </span>
         <div className="flex -ml-[85px]">
           <button
-            onClick={loginWithGoogle}
+            onClick={() => loginAuth(GoogleAuthProvider)}
             type="button"
             style={{
               marginLeft: "90px",
@@ -126,6 +130,7 @@ const Login = () => {
           </button>
 
           <button
+            onClick={() => loginAuth(GithubAuthProvider)}
             style={{
               marginLeft: "90px",
               width: "289px",
