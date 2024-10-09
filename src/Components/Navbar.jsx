@@ -24,6 +24,12 @@ const Navbar = () => {
       userUid = user.uid;
       getAllData();
     }
+    if (user.displayName && user.photoURL) {
+      setEmail(user.email);
+      setName(user.displayName);
+
+      setUserImage(user.photoURL);
+    }
   });
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -53,6 +59,7 @@ const Navbar = () => {
         setName(doc.data().firstName + " " + doc.data().lastName);
 
         setUserImage(doc.data().image);
+        console.log(doc.data());
       }
     });
   };
@@ -77,95 +84,78 @@ const Navbar = () => {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li>
-              <a>Item 1</a>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            <li
+              style={{
+                marginLeft: "110px",
+              }}
+            >
+              <Link to="/">Home</Link>
             </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
+
+            <li
+              style={{
+                marginRight: "-30px",
+              }}
+            >
+              <Link to="addblog">AddBlog</Link>
             </li>
-            <li>
-              <a>Item 3</a>
+            <li
+              style={{
+                marginLeft: "-160px",
+              }}
+            >
+              <Link to="userblog">UserBlog</Link>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-
-          <li>
-            <Link to="addblog">AddBlog</Link>
-          </li>
-          <li>
-            <Link to="userblog">UserBlog</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              {userImage ? (
-                <img
-                  // alt="Tailwind CSS Navbar component"
-                  id="userImage"
-                  src={userImage}
-                />
-              ) : (
-                <div className="placeholder-avatar">Loading...</div>
+        <div className="navbar-end">
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              {userImage && (
+                <div className="w-10 rounded-full">
+                  <img
+                    // alt="Tailwind CSS Navbar component"
+                    id="userImage"
+                    src={userImage}
+                  />
+                </div>
               )}
             </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li style={{ background: "#f0f4f8" }}>
+                <Link to="profile" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li style={{ background: "#f0f4f8" }}>
+                <a>{name}</a>
+              </li>
+              <li style={{ background: "#f0f4f8" }}>
+                <a>{email}</a>
+              </li>
+              <li style={{ background: "#f0f4f8" }}>
+                <a onClick={Logout}>Logout</a>
+              </li>
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
-            <li style={{ background: "#f0f4f8" }}>
-              <Link to="profile" className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
-            </li>
-            <li style={{ background: "#f0f4f8" }}>
-              <a>{name}</a>
-            </li>
-            <li style={{ background: "#f0f4f8" }}>
-              <a>{email}</a>
-            </li>
-            <li style={{ background: "#f0f4f8" }}>
-              <a onClick={Logout}>Logout</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
+
+    // export default Navbar;
+    // import React from "react";
   );
 };
-
-// export default Navbar;
-// import React from "react";
-
-// const Navbar = () => {
-//   return <div>Home</div>;
-// };
 
 export default Navbar;

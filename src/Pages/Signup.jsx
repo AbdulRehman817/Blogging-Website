@@ -68,7 +68,7 @@ const Signup = () => {
 
       // Get the download URL for the uploaded image
       const getImage = await getDownloadURL(storageRef);
-
+      console.log(getImage);
       // Update the user's profile with name and photo
       await updateProfile(auth.currentUser, {
         displayName: `${firstName} ${lastName}`,
@@ -85,7 +85,7 @@ const Signup = () => {
       });
 
       // Navigate to home page after successful signup
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       // Handle specific Firebase errors
       if (error.code === "auth/email-already-in-use") {
@@ -125,7 +125,7 @@ const Signup = () => {
           ref={userLastName}
         />
         <a onClick={loginBtn}>Already have an account</a>
-        <input type="submit" value="Signup" />
+        <input type="submit" value="Signup" onClick={SignupBtn} />
         <br />
 
         {warning && (
