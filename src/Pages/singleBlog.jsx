@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db, doc, getDoc } from "../../FirebaseConfig/Firebase.js";
-import "./SingleBlog.css";
+import "./singleblog.css";
 
 const SingleBlog = () => {
   const [singleBlog, setSingleBlog] = useState(null);
