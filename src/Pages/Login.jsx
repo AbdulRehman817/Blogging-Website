@@ -6,7 +6,7 @@ import {
   GithubAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-} from "./firebase"; // Update import paths as needed
+} from "../../FirebaseConfig/Firebase.js"; // Update import paths as needed
 
 const Login = () => {
   const email = useRef();
