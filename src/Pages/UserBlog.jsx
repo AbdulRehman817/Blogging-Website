@@ -177,7 +177,7 @@ const UserBlog = () => {
       {blogs.length > 0 ? (
         blogs.map((item) => (
           <div key={item.id} className="blog-card">
-            <img src={item.blogImage} alt="Blog" className="blog-image" />
+            <img src={item.blogImg} alt="Blog" className="blog-image" />
             {editingBlogId === item.id ? ( // Check if this blog is being edited
               <div className="edit-container">
                 <input

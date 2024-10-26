@@ -1,27 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db, doc, getDoc } from "../../FirebaseConfig/Firebase.js";
+import "./SingleBlog.css";
 
 const SingleBlog = () => {
   const [singleBlog, setSingleBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  const getData = async () => {
+  const getBlogFromBlogs = async () => {
     try {
-      const docRef = doc(db, "blogs", id);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        setSingleBlog(docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
+      const docRefBlogs = doc(db, "blogs", id);
+      const docSnapBlogs = await getDoc(docRefBlogs);
+      return docSnapBlogs.exists()
+        ? { ...docSnapBlogs.data(), source: "blogs" }
+        : null;
     } catch (error) {
-      console.error("Error fetching document: ", error);
-    } finally {
-      setLoading(false);
+      console.error("Error fetching document from blogs: ", error);
+      return null;
     }
+  };
+
+  const getBlogFromBlogData = async () => {
+    try {
+      const docRefBlogData = doc(db, "BlogData", id);
+      const docSnapBlogData = await getDoc(docRefBlogData);
+      return docSnapBlogData.exists()
+        ? { ...docSnapBlogData.data(), source: "BlogData" }
+        : null;
+    } catch (error) {
+      console.error("Error fetching document from BlogData: ", error);
+      return null;
+    }
+  };
+
+  const getData = async () => {
+    const blogFromBlogs = await getBlogFromBlogs();
+    if (blogFromBlogs) {
+      setSingleBlog(blogFromBlogs);
+    } else {
+      const blogFromBlogData = await getBlogFromBlogData();
+      if (blogFromBlogData) {
+        setSingleBlog(blogFromBlogData);
+      } else {
+        console.log("No such document in both collections!");
+      }
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -30,11 +55,8 @@ const SingleBlog = () => {
 
   if (loading) {
     return (
-      <div style={loaderContainerStyle}>
-        <span
-          className="loading loading-ring loading-lg"
-          style={loaderStyle}
-        ></span>
+      <div className="loaderContainer">
+        <span className="loading loading-ring loading-lg loader"></span>
       </div>
     );
   }
@@ -44,77 +66,22 @@ const SingleBlog = () => {
   }
 
   return (
-    <div style={blogCardStyle}>
-      <div style={imgWrapperStyle}>
-        <img src={singleBlog.blogImg} alt={singleBlog.title} style={imgStyle} />
+    <div className="blogCard">
+      <div className="imgWrapper">
+        <img
+          src={singleBlog.blogImg}
+          alt={singleBlog.title}
+          className="blogImg"
+        />
       </div>
-      <div style={contentStyle}>
-        <h2 style={titleStyle}>{singleBlog.title}</h2>
-        <p style={authorStyle}>AUTHOR: {singleBlog.author}</p>
-        <p style={authorStyle}>CATEGORY: {singleBlog.category}</p>
-        <p style={descriptionStyle}>DESCRIPTION :{singleBlog.content}</p>
+      <div className="content">
+        <h2 className="title">{singleBlog.title}</h2>
+        <p className="author">AUTHOR: {singleBlog.author}</p>
+        <p className="category">CATEGORY: {singleBlog.category}</p>
+        <p className="description">DESCRIPTION: {singleBlog.content}</p>
       </div>
     </div>
   );
 };
 
-const blogCardStyle = {
-  display: "flex",
-  alignItems: "flex-start",
-  backgroundColor: "#f9f9f9", // Light background color
-  borderRadius: "10px",
-  padding: "15px",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  marginBottom: "20px",
-  maxWidth: "700px",
-  margin: "auto",
-  gap: "20px",
-  marginTop: "50px",
-};
-
-const imgWrapperStyle = {
-  flex: "3",
-  marginRight: "20px",
-};
-
-const imgStyle = {
-  width: "100%",
-  height: "450px",
-  // objectFit: "cover",
-  borderRadius: "8px",
-};
-
-const contentStyle = {
-  flex: "3",
-  textAlign: "left",
-};
-
-const titleStyle = {
-  fontSize: "27px",
-  fontWeight: "bold",
-  marginBottom: "10px",
-};
-
-const authorStyle = {
-  fontSize: "14px",
-  color: "#666",
-  marginBottom: "10px",
-};
-
-const descriptionStyle = {
-  fontSize: "16px",
-  color: "#444",
-  lineHeight: "1.6",
-};
-const loaderContainerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh", // Full viewport height
-};
-
-const loaderStyle = {
-  width: "100px", // Increase loader size
-  height: "100px", // Increase loader size
-};
 export default SingleBlog;
