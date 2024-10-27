@@ -28,7 +28,9 @@ const Login = () => {
         setWarning("Error signing in. Please try again.");
       });
   };
-
+  const signupPage = () => {
+    navigate("/Signup");
+  };
   const SignupBtn = (e) => {
     e.preventDefault();
     setWarning("");
@@ -70,13 +72,7 @@ const Login = () => {
         </div>
         <input type="text" placeholder="Enter email" ref={email} />
         <input type="password" placeholder="Enter password" ref={password} />
-        <a
-          onClick={() => {
-            /* Navigate to signup */
-          }}
-        >
-          Don't have an account
-        </a>
+        <a onClick={signupPage}>Don't have an account</a>
         <input type="submit" onClick={SignupBtn} />
         <span style={{ textAlign: "center", color: "white" }}>OR</span>
         <div className="flex socialButtons">
